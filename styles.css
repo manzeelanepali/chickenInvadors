@@ -1,0 +1,80 @@
+
+.instruction-container{
+   
+    height: 650px;
+    width: 600px;
+    border-radius: 8px;
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    gap:300px
+  
+   
+   
+
+
+}
+.logo{
+    margin-top: 50px;
+    height: 200px;
+    width: 400px;
+    margin-left: 50px;
+}
+
+.main-container{
+     width: 500;
+     height: 650px;
+     background-color: #f1f1f1;
+            position: relative;
+            
+            display: none; 
+    
+    
+}
+
+.game-container{
+        width: 1140px;
+            height: 600px;
+            position: absolute;
+            top: 0;
+            left: 80px;
+    right: 80px;
+background-image: url("./images/backgroundimage-1.jpg");
+             
+            background-size: 100%;
+            background-repeat: repeat-y;
+            animation: backgroundAnimation 4s linear infinite; */
+        }
+         
+           @keyframes backgroundAnimation {
+            0% {
+                background-position-y: 0%;
+            }
+            100% {
+                background-position-y: 200%;
+            }
+        }
+
+        .start-button {
+        border-radius:  20px;
+        border: none;
+        color:white;
+        font-size: 40px;
+        font-family: 'Courier New', Courier, monospace;
+        background-color: green;
+        margin-left: 100px;
+    
+        }
+
+        .main-player-bird {
+            height: 80px;
+            width: 80px;
+            bottom: 0px;
+            left: 50%;
+          
+
+            /* background-image: url("./images/mainPlayer.gif"); */
+            
+               position: absolute;
+        }
+

@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mainContainer.style.display = "block";
         showMainPlayer()
         setupKeyboardControls();
+         setInterval( generateChicken, 2000); 
     }
 
     function showMainPlayer(){
@@ -37,6 +38,28 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update the player's position
         mainPlayer.style.left = playerPositionX + "px";
     }
-  
+
+  function generateChicken() {
+    const enemyChicken = document.createElement("div");
+    enemyChicken.classList.add("enemy-chicken");
+
+    const randomPositionX = Math.floor(Math.random() * (gameContainer.offsetWidth - 50));
+    enemyChicken.style.left = randomPositionX + "px";
+    enemyChicken.style.top = "0px"; // Place the enemy chicken at the top side of the game container
+
+    gameContainer.appendChild(enemyChicken);
+
+    const fallInterval = setInterval(() => {
+      const currentTop = parseInt(enemyChicken.style.top);
+      const newTop = currentTop + 5; // Adjust the value to control the falling speed
+
+      if (newTop >= gameContainer.offsetHeight) {
+        clearInterval(fallInterval);
+        enemyChicken.remove();
+      } else {
+        enemyChicken.style.top = newTop + "px";
+      }
+    }, 50); // Adjust the interval to control the falling speed
+  }
     startButton.addEventListener('click', startGame);
 });

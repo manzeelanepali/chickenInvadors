@@ -2,13 +2,23 @@
 .instruction-container{
    
     height: 650px;
-    width: 600px;
+      width: 500px;
+    /* width: 100%; */
     border-radius: 8px;
-    background-color: aqua;
-    display: flex;
-    flex-direction: column;
-    gap:300px
-  
+    background-image:url("./images/backgroundimage-1.jpg");
+   
+     /* background-repeat: repeat-y;
+            animation: backgroundAnimation 4s linear infinite; 
+        }
+         
+           @keyframes backgroundAnimation {
+            0% {
+                background-position-y: 0%;
+            }
+            100% {
+                background-position-y: 200%;
+            }
+    */
    
    
 
@@ -20,11 +30,18 @@
     width: 400px;
     margin-left: 50px;
 }
+/* .hen-picture {
+ 
+    height: 200px;
+    width: 120px;
+    margin-left: 100px;
+
+} */
 
 .main-container{
-     width: 500;
+     width: 1150px;
      height: 650px;
-     background-color: #f1f1f1;
+     background-color:blue;
             position: relative;
             
             display: none; 
@@ -33,17 +50,18 @@
 }
 
 .game-container{
-        width: 1140px;
+        width: 1000px;
             height: 600px;
-            position: absolute;
+            position: relative;
             top: 0;
             left: 80px;
+            right: 40px;
     right: 80px;
-background-image: url("./images/backgroundimage-1.jpg");
+ background-image: url("./images/backgroundimage-1.jpg");
              
             background-size: 100%;
             background-repeat: repeat-y;
-            animation: backgroundAnimation 4s linear infinite; */
+            animation: backgroundAnimation 1s linear infinite; 
         }
          
            @keyframes backgroundAnimation {
@@ -52,8 +70,8 @@ background-image: url("./images/backgroundimage-1.jpg");
             }
             100% {
                 background-position-y: 200%;
-            }
-        }
+            } 
+        } 
 
         .start-button {
         border-radius:  20px;
@@ -77,4 +95,21 @@ background-image: url("./images/backgroundimage-1.jpg");
             
                position: absolute;
         }
+    .enemy-chicken {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px; /* Adjust the width and height according to your enemy chicken size */
+  height: 40px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #000;
+}
+ 
+   
+
+
+
+
+        
 

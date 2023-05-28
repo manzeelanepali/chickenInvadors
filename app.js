@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mainContainer = document.querySelector(".main-container");
     const gameContainer = document.querySelector(".game-container")
     const mainPlayer = document.querySelector(".main-player-bird")
+    const scorePlaceHolder = document.createElement("div")
   
     let playerPositionX = 500;
     // let currentOpposite = false ;
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
    const  ammoSpeed = 10;
    const ammoWidth=10;
    const ammoHeight =10;
+   let initialScore =0;
 
 
 
@@ -27,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setInterval( generateChickenGroup(), 1000);
         
         setInterval(fireAmmo, 200)
+       
        
      
     }
@@ -145,7 +148,9 @@ function checkCollision(ammo, intervalId) {
     if (isColliding(ammoRect, enemyRect)) {
       gameContainer.removeChild(ammo);
   enemyChicken.parentNode.removeChild(enemyChicken);
+
       clearInterval(intervalId);
+       increaseScore();
       break;
     }
   }
@@ -159,8 +164,14 @@ function isColliding(rect1, rect2) {
     rect1.bottom > rect2.top
   );
 }
+  function increaseScore() {
+   initialScore++;
+   scorePlaceHolder.textContent = "Score: " + initialScore;
+  }
 
 
 
     startButton.addEventListener('click', startGame);
+    scorePlaceHolder.classList.add("score-placeholder");
+  mainContainer.appendChild(scorePlaceHolder);
 });

@@ -101,6 +101,7 @@
             /* background-image: url("./images/mainPlayer.gif"); */
             
                position: absolute;
+             
         }
     .enemy-chicken {
   position: relative;
@@ -131,7 +132,16 @@
     justify-content: center;
     gap: 10px;
 }
- 
+ .ammo {
+    background-color: green;
+    height: 10px;
+    width: 10px;
+    position: absolute;
+    border-radius: 50%;
+   
+    
+
+ }
    
 
 

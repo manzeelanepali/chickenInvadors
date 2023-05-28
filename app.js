@@ -11,17 +11,23 @@ document.addEventListener("DOMContentLoaded", () => {
    
     const chickenGap =20;
     // let intervalId;
+
+   const  ammoSpeed = 10;
+   const ammoWidth=10;
+   const ammoHeight =10;
+
+
+
     function startGame() {
       
         instructionContainer.style.display = "none";
         mainContainer.style.display = "block";
         showMainPlayer()
         setupKeyboardControls();
-
-        // for (let i=0;i<4;i++){
-            
-        // }
-        setInterval( generateChickenGroup(), 1000); 
+        setInterval( generateChickenGroup(), 1000);
+        
+        setInterval(fireAmmo, 200)
+       
      
     }
 
@@ -47,6 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
             playerPositionX += 10; // Adjust the value according to your desired movement speed
              
                if(playerPositionX>960)playerPositionX=960;
+        }
+        else if (key === " "){
+            fireAmmo();
         }
         
         // Update the player's position
@@ -103,6 +112,54 @@ enemyGroup.style.top= - (numRows*( chickeHeight+chickenGap)-chickenGap) + "px"
   gameContainer.appendChild(enemyGroup);
 }
 
+
+
+ function fireAmmo() {
+    const ammo = document.createElement("div");
+    ammo.classList.add("ammo");
+    gameContainer.appendChild(ammo);
+
+    const playerPositionY = mainPlayer.offsetTop;
+    const ammoPositionX = playerPositionX + (mainPlayer.offsetWidth - ammoWidth) / 2;
+    ammo.style.left = ammoPositionX + "px";
+    ammo.style.top = playerPositionY - ammoHeight + "px";
+    gameContainer.appendChild(ammo);
+
+    const ammoInterval = setInterval(() => {
+      let currentTop = parseInt(ammo.style.top);
+      let newTop = currentTop - ammoSpeed;
+      ammo.style.top = newTop + "px";
+      checkCollision(ammo, ammoInterval);
+    }, 50);
+}
+
+
+  function checkCollision(ammo, intervalId) {
+    const ammoRect = ammo.getBoundingClientRect();
+    // console.log( "ammocheck ", ammoRect)
+    const enemyChickens = document.querySelectorAll(".enemy-chicken");
+
+    for (let i = 0; i < enemyChickens.length; i++) {
+      const enemyChicken = enemyChickens[i];
+      const enemyRect = enemyChicken.getBoundingClientRect();
+
+      if (isColliding(ammoRect, enemyRect)) {
+        gameContainer.removeChild(ammo);
+        gameContainer.removeChild(enemyChicken);
+        clearInterval(intervalId);
+        break;
+      }
+    }
+  }      
+
+  function isColliding(rect1, rect2) {
+    return (
+      rect1.left < rect2.right &&
+      rect1.right > rect2.left &&
+      rect1.top < rect2.bottom &&
+      rect1.bottom > rect2.top
+    );
+  }
 
 
     startButton.addEventListener('click', startGame);

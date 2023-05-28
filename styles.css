@@ -1,3 +1,7 @@
+*,*::after,*::before{
+    margin:0;
+    padding: 0;
+}
 
 .instruction-container{
    
@@ -55,7 +59,9 @@
             position: relative;
             top: 0;
             left: 80px;
-            right: 40px;
+
+         
+         
     right: 80px;
  background-image: url("./images/backgroundimage-1.jpg");
              
@@ -85,10 +91,11 @@
         }
 
         .main-player-bird {
-            height: 80px;
-            width: 80px;
+            height: 50px;
+            width: 40px;
             bottom: 0px;
             left: 50%;
+            /* overflow: hidden; */
           
 
             /* background-image: url("./images/mainPlayer.gif"); */
@@ -96,14 +103,33 @@
                position: absolute;
         }
     .enemy-chicken {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 40px; /* Adjust the width and height according to your enemy chicken size */
   height: 40px;
-  background-color: #ff0000;
+ 
   border-radius: 50%;
-  box-shadow: 0 0 5px #000;
+ 
+  
+}
+
+.enemy-group{
+   
+    position: relative;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+
+}
+
+.enemy-row{
+    
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
 }
  
    

@@ -33,6 +33,7 @@
     height: 200px;
     width: 400px;
     margin-left: 50px;
+    top: 30px
 }
 /* .hen-picture {
  
@@ -47,6 +48,7 @@
      height: 650px;
      background-color:blue;
             position: relative;
+            top:30px;
             
             display: none; 
     
@@ -57,7 +59,7 @@
         width: 1000px;
             height: 600px;
             position: relative;
-            top: 0;
+            top: 30px;
             left: 80px;
 
          

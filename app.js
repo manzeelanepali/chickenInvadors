@@ -134,32 +134,32 @@ enemyGroup.style.top= - (numRows*( chickeHeight+chickenGap)-chickenGap) + "px"
 }
 
 
-  function checkCollision(ammo, intervalId) {
-    const ammoRect = ammo.getBoundingClientRect();
-    // console.log( "ammocheck ", ammoRect)
-    const enemyChickens = document.querySelectorAll(".enemy-chicken");
+function checkCollision(ammo, intervalId) {
+  const ammoRect = ammo.getBoundingClientRect();
+  const enemyChickens = document.querySelectorAll(".enemy-chicken");
 
-    for (let i = 0; i < enemyChickens.length; i++) {
-      const enemyChicken = enemyChickens[i];
-      const enemyRect = enemyChicken.getBoundingClientRect();
+  for (let i = 0; i < enemyChickens.length; i++) {
+    const enemyChicken = enemyChickens[i];
+    const enemyRect = enemyChicken.getBoundingClientRect();
 
-      if (isColliding(ammoRect, enemyRect)) {
-        gameContainer.removeChild(ammo);
-        gameContainer.removeChild(enemyChicken);
-        clearInterval(intervalId);
-        break;
-      }
+    if (isColliding(ammoRect, enemyRect)) {
+      gameContainer.removeChild(ammo);
+  enemyChicken.parentNode.removeChild(enemyChicken);
+      clearInterval(intervalId);
+      break;
     }
-  }      
-
-  function isColliding(rect1, rect2) {
-    return (
-      rect1.left < rect2.right &&
-      rect1.right > rect2.left &&
-      rect1.top < rect2.bottom &&
-      rect1.bottom > rect2.top
-    );
   }
+}
+
+function isColliding(rect1, rect2) {
+  return (
+    rect1.left < rect2.right &&
+    rect1.right > rect2.left &&
+    rect1.top < rect2.bottom &&
+    rect1.bottom > rect2.top
+  );
+}
+
 
 
     startButton.addEventListener('click', startGame);

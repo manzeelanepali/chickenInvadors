@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const mainPlayer = document.querySelector(".main-player-bird")
     const scorePlaceHolder = document.createElement("div")
     const ammoSound = new Audio ("./sounds/ammoFire.wav")
+    const enemyHit = new Audio ("./sounds/enemyHit.mp3")
   
     let playerPositionX = 500;
     // let currentOpposite = false ;
@@ -150,6 +151,7 @@ function checkCollision(ammo, intervalId) {
   for (let i = 0; i < enemyChickens.length; i++) {
     const enemyChicken = enemyChickens[i];
     const enemyRect = enemyChicken.getBoundingClientRect();
+     enemyHit.play()
 
     if (isColliding(ammoRect, enemyRect)) {
       gameContainer.removeChild(ammo);

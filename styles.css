@@ -111,6 +111,7 @@
   left: 0;
   width: 40px; /* Adjust the width and height according to your enemy chicken size */
   height: 40px;
+  background-color: none;
  
   border-radius: 50%;
  

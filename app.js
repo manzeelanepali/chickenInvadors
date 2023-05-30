@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mainContainer.style.display = "block";
         showMainPlayer()
         setupKeyboardControls();
-        setInterval( generateChickenGroup(), 1000);
+        setInterval( generateChickenGroup(),500);
   
        
        
@@ -77,17 +77,16 @@ function generateChickenGroup() {
   enemyGroup.classList.add("enemy-group");
 
   const numRows = 4; // Number of rows of enemy chickens
-  const numChickensPerRow = 16; // Number of enemy chickens in each row
+  const numChickensPerRow = [8,6,4,2]; // Number of enemy chickens in each row
  
   
-    
 
   for(let j = 0 ; j< numRows ;j++){
 
 const chickenRow = document.createElement("div");
       chickenRow.classList.add("enemy-row");
 
-  for (let i = 0; i < numChickensPerRow; i++) {
+  for (let i = 0; i < numChickensPerRow[j]; i++) {
         const enemyChicken = document.createElement("img");
         enemyChicken.src = "hen.gif"; // Replace "hen.gif" with the path to your chicken image
         enemyChicken.classList.add("enemy-chicken");

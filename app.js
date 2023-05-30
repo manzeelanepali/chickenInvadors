@@ -12,12 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const chickeHeight =40;
    
     const chickenGap =20;
-    // let intervalId;
+    //  let intervalId;
 
    const  ammoSpeed = 10;
    const ammoWidth=10;
    const ammoHeight =10;
-   let initialScore =0;
+   let currentScore =0;
+   let highestScore = localStorage.getItem("highestScore")||0
 
 
 
@@ -28,13 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
         showMainPlayer()
         setupKeyboardControls();
         setInterval( generateChickenGroup(), 1000);
-        
-        setInterval(fireAmmo, 200)
+  
        
        
      
     }
-
+  
     function showMainPlayer(){
        
         mainPlayer.style.display="block"
@@ -58,8 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
              
                if(playerPositionX>960)playerPositionX=960;
         }
-        else if (key === "32 "){
+        else if (key === " "){
             fireAmmo();
+            
+
+           
         }
         
         // Update the player's position
@@ -135,8 +138,8 @@ enemyGroup.style.top= - (numRows*( chickeHeight+chickenGap)-chickenGap) + "px"
       ammo.style.top = newTop + "px";
       checkCollision(ammo, ammoInterval);
     }, 50);
+     ammoSound.play();
 
-      ammoSound.play();
 }
 
 
@@ -154,11 +157,12 @@ function checkCollision(ammo, intervalId) {
 
       clearInterval(intervalId);
        increaseScore();
+  
       break;
     }
   }
 }
-
+      
 function isColliding(rect1, rect2) {
   return (
     rect1.left < rect2.right &&
@@ -167,14 +171,17 @@ function isColliding(rect1, rect2) {
     rect1.bottom > rect2.top
   );
 }
-  function increaseScore() {
-   initialScore++;
-   scorePlaceHolder.textContent = "Score: " + initialScore;
+ function increaseScore() {
+    currentScore++;
+    if (currentScore > highestScore) {
+      highestScore = currentScore;
+      localStorage.setItem("highestScore", highestScore);
+    }
+    scorePlaceHolder.textContent = "Score: " + currentScore + " (Highest: " + highestScore + ")";
   }
 
-
-
-    startButton.addEventListener('click', startGame);
-    scorePlaceHolder.classList.add("score-placeholder");
+  startButton.addEventListener("click", startGame);
+  scorePlaceHolder.classList.add("score-placeholder");
+  scorePlaceHolder.textContent = "Score: 0 (Highest: " + highestScore + ")";
   mainContainer.appendChild(scorePlaceHolder);
 });

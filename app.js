@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const gameContainer = document.querySelector(".game-container")
     const mainPlayer = document.querySelector(".main-player-bird")
     const scorePlaceHolder = document.createElement("div")
+    const ammoSound = new Audio ("./sounds/ammoFire.wav")
   
     let playerPositionX = 500;
     // let currentOpposite = false ;
@@ -57,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
              
                if(playerPositionX>960)playerPositionX=960;
         }
-        else if (key === " "){
+        else if (key === "32 "){
             fireAmmo();
         }
         
@@ -134,6 +135,8 @@ enemyGroup.style.top= - (numRows*( chickeHeight+chickenGap)-chickenGap) + "px"
       ammo.style.top = newTop + "px";
       checkCollision(ammo, ammoInterval);
     }, 50);
+
+     ammoSound.play();
 }
 
 

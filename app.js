@@ -76,7 +76,7 @@ function generateChickenGroup() {
   const numChickensPerRow = 16; // Number of enemy chickens in each row
  
   
-  
+    
 
   for(let j = 0 ; j< numRows ;j++){
 
@@ -136,7 +136,7 @@ enemyGroup.style.top= - (numRows*( chickeHeight+chickenGap)-chickenGap) + "px"
       checkCollision(ammo, ammoInterval);
     }, 50);
 
-     ammoSound.play();
+      ammoSound.play();
 }
 
 

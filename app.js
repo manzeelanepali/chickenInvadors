@@ -55,14 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-
-  function createBox() {
-  // Get the box element
-  // const box = document.querySelector(".box");
-
+function createBox() {
   const box = document.createElement("div");
   box.classList.add("box");
-  document.body.appendChild(box);
+  mainContainer.appendChild(box);
 
   // Calculate the screen height and width
   const screenHeight = window.innerHeight;
@@ -85,10 +81,25 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-for (let i = 0; i < 20; i++) {
+setInterval(createBox, 600); // Generate box every 1 minute
+
+// ...
+
+
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+for (let i = 0; i < 5; i++) {
   setTimeout(createBox, getRandomNumber(0, 5000)); // Random delay between 0 to 5 seconds
 }
+
+
     
+
+
+
+
 
 
 

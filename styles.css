@@ -6,8 +6,8 @@
 .instruction-container{
    
     height: 650px;
-      width: 500px;
-    /* width: 100%; */
+      
+    width: 100%;
     border-radius: 8px;
     background-image:url("./images/backgroundimage-1.jpg");
    
@@ -17,23 +17,24 @@
          
            @keyframes backgroundAnimation {
             0% {
-                background-position-y: 0%;
+                background-position-y: 100%;
             }
             100% {
                 background-position-y: 200%;
-            }
-    */
-   
-   
+            } */
+    
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
+   align-items: center;
 
 
 }
 .logo{
-    margin-top: 50px;
+   
     height: 200px;
     width: 400px;
-    margin-left: 50px;
-    top: 30px
+
 }
 /* .hen-picture {
  
@@ -44,32 +45,27 @@
 } */
 
 .main-container{
-     width: 1150px;
-     height: 650px;
+    margin: auto;
+     width: 95vw;
+     height:95vh;
      background-color:blue;
-            position: relative;
-            top:30px;
-            
-            display: none; 
+    display: none; 
+    
     
     
 }
 
 .game-container{
-        width: 1000px;
-            height: 600px;
-            position: relative;
-            top: 30px;
-            left: 80px;
-
-         
-         
-    right: 80px;
- background-image: url("./images/backgroundimage-1.jpg");
-             
-            background-size: 100%;
-            background-repeat: repeat-y;
-            animation: backgroundAnimation 4s linear infinite; 
+    margin: auto ;
+      width: 90%;
+      height: 90%;
+      position: relative;
+      top: 5%;
+      overflow: hidden;
+      background-image: url("./images/backgroundimage-1.jpg");
+    background-size: 100%;
+        background-repeat: repeat-y;
+       animation: backgroundAnimation 4s linear infinite; 
         }
          
            @keyframes backgroundAnimation {
@@ -81,16 +77,15 @@
             } 
         } 
 
-        .start-button {
-        border-radius:  20px;
-        border: none;
-        color:white;
-        font-size: 40px;
-        font-family: 'Courier New', Courier, monospace;
-        background-color: green;
-        margin-left: 100px;
-    
-        }
+      .start-button {
+    border-radius: 20px;
+    border: none;
+    color: white;
+    font-size: 49px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: green;
+
+}
 
         .main-player-bird {
             height: 50px;
@@ -107,8 +102,8 @@
         }
     .enemy-chicken {
   position: relative;
-  top: 0;
-  left: 0;
+  /* top: 0;
+  left: 0; */
   width: 40px; /* Adjust the width and height according to your enemy chicken size */
   height: 40px;
   background-color: none;
@@ -119,22 +114,23 @@
 }
 
 .enemy-group{
+    width: fit-content;
    
     position: relative;
-   display: flex;
-   flex-direction: column;
+   /* display: flex;
+   flex-direction: column; */
    
-   gap: 20px;
+   /* gap: 20px; */
 
 }
 
 .enemy-row{
     
     position: relative;
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 10px;
+    gap: 10px; */
 }
  .ammo {
     background-color: green;
@@ -147,14 +143,16 @@
 
  }
  .score-placeholder{
-    height: 40px;
-    width: 80px;
+    height: 60px;
+    width: 100px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
     
     background-color: green;
     color: white;
     padding: 10px;
-    left: 1050px;
-    border-radius: 10px;
+    right:-1215px;
+    border-radius:10px;
     position: relative;
    
  }

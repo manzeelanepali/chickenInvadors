@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const scorePlaceHolder = document.createElement("div");
   const ammoSound = new Audio("./sounds/ammoFire.wav");
   const enemyHit = new Audio("./sounds/enemyHit.mp3");
-
+  
   let playerPositionX = 500;
   const chickeHeight = 40;
   const chickenGap = 20;
@@ -17,16 +17,18 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentScore = 0;
   let highestScore = localStorage.getItem("highestScore") || 0;
   
-
+  
   function startGame() {
     instructionContainer.style.display = "none";
     mainContainer.style.display = "block";
     showMainPlayer();
     setupKeyboardControls();
     setInterval(generateChickenGroup(), 500);
-    createBox()
- 
+    // createBox()
+    // createObstacle()
+    
   }
+  console.log( gameContainer.offsetWidth)
   
   function showMainPlayer() {
     mainPlayer.style.display = "block";
@@ -58,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function createBox() {
   const box = document.createElement("div");
   box.classList.add("box");
-  mainContainer.appendChild(box);
+  gameContainer.appendChild(box);
 
   // Calculate the screen height and width
   const screenHeight = window.innerHeight;
@@ -81,7 +83,7 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-setInterval(createBox, 600); // Generate box every 1 minute
+// setInterval(createBox, 6000); // Generate box every 1 minute
 
 // ...
 
@@ -90,9 +92,9 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-for (let i = 0; i < 5; i++) {
-  setTimeout(createBox, getRandomNumber(0, 5000)); // Random delay between 0 to 5 seconds
-}
+// for (let i = 0; i < 5; i++) {
+//   setTimeout(createBox, getRandomNumber(0, 5000)); // Random delay between 0 to 5 seconds
+// }
 
 
     
@@ -105,63 +107,97 @@ for (let i = 0; i < 5; i++) {
 
 
 
+function generateChickenGroup() {
+  const enemyGroup = document.createElement("div");
+  enemyGroup.classList.add("enemy-group");
 
+  const numRows = 4; // Number of rows of enemy chickens
 
-  
+  const numChickensPerRow = [];
+  for (let j = 0; j < numRows; j++) {
+    numChickensPerRow.push(numRows + numRows - j - 1);
+  }
+ const containerWidth = 400;
+  const chickenWidth = 50; // Width of each chicken
+  const chickenHeight = 50; // Height of each chicken
+  const chickenGap = 10; // Gap between each chicken
 
-  function generateChickenGroup() {
-    const enemyGroup = document.createElement("div");
-    enemyGroup.classList.add("enemy-group");
+  const maxChickensInRow = numRows * 2 - 1; // Maximum number of chickens in a row
 
-    const numRows = 4; // Number of rows of enemy chickens
-    const numChickensPerRow = [8, 6, 4, 2]; // Number of enemy chickens in each row
+   // Width of the game container
+  const groupWidth = maxChickensInRow * (chickenWidth + chickenGap) - chickenGap; // Width of the chicken group
+console.log(groupWidth,"hey")
+  const leftOffset = (containerWidth - groupWidth) / 2; // Calculate the left offset to center the chicken group
 
-    for (let j = 0; j < numRows; j++) {
-      const chickenRow = document.createElement("div");
-      chickenRow.classList.add("enemy-row");
+  let topOffset = 0; // Initial top offset
 
-      for (let i = 0; i < numChickensPerRow[j]; i++) {
-        const enemyChicken = document.createElement("img");
-        enemyChicken.src = "hen.gif"; // Replace "hen.gif" with the path to your chicken image
-        enemyChicken.classList.add("enemy-chicken");
+  for (let j = 0; j < numRows; j++) {
+    const chickenRow = document.createElement("div");
+    chickenRow.classList.add("enemy-row");
 
-        chickenRow.appendChild(enemyChicken);
-      }
+    const numChickensInRow = numChickensPerRow[j]; // Number of chickens in the current row
 
-      enemyGroup.appendChild(chickenRow);
+    const rowWidth = numChickensInRow * (chickenWidth + chickenGap) - chickenGap; // Width of the row
+
+    const rowLeftOffset = (groupWidth - rowWidth) / 2; // Calculate the left offset to center the row
+
+    for (let i = 0; i < numChickensInRow; i++) {
+      const enemyChicken = document.createElement("img");
+      enemyChicken.src = "hen.gif"; // Replace "hen.gif" with the path to your chicken image
+      enemyChicken.classList.add("enemy-chicken");
+
+      enemyChicken.style.position = "absolute"; // Set position to absolute
+      enemyChicken.style.left = `${leftOffset + rowLeftOffset + i * (chickenWidth + chickenGap)}px`; // Set the left offset
+      enemyChicken.style.top = `${topOffset}px`; // Set the top offset
+
+      chickenRow.appendChild(enemyChicken);
     }
 
-    let direction = 1;
+    enemyGroup.appendChild(chickenRow);
 
-    const startingLeft = -(numRows * (chickeHeight + chickenGap) - chickenGap);
+    topOffset += chickenHeight + chickenGap; // Increment the top offset for the next row
+  }
 
    
 
-    enemyGroup.style.left = `-600px`;
+    const startingLeft = -(numRows * (chickeHeight + chickenGap) - chickenGap);
 
-    const containerWidth = 400;
+  
 
+    enemyGroup.style.left = `0px`;
+
+     
+
+    let left = 0;
+    let top = 0;
+    let direction = 1;
     const intervalId = setInterval(() => {
-      let left = parseInt(enemyGroup.offsetLeft);
-      let top = parseInt(enemyGroup.offsetTop);
-
+     
       left += 5 * direction;
+      console.log("left",left)
 
-      top += 50;
+     
 
       enemyGroup.style.left = `${left}px`;
-
-      if (left >= containerWidth && direction === 1) {
+      console.log(enemyGroup.offsetWidth,)
+     
+      // console.dir(enemyGroup   )
+      // console.log(left,enemyGroup.offsetWidth,gameContainer.offsetWidth)
+   
+      if (left +  groupWidth> gameContainer.offsetWidth  ) {
         direction = -1; // Reverse direction when reaching the container edges
-
-        enemyGroup.style.top = `${top}px`;
+  enemyGroup.style.top = `${top}px`;
+   top += 50;
+        console.log( "just checking ")
+       }
+        
+        if (left < 0 ) {
+          direction = 1; 
+            enemyGroup.style.top = `${top}px`;
+             top += 50;// Reverse direction when reaching the container edges
+          console.log( "check again")
       }
-
-      if (left <= startingLeft && direction === -1) {
-        direction = 1; // Reverse direction when reaching the container edges
-        enemyGroup.style.top = `${top}px`;
-      }
-    }, 30);
+    }, 60);
 
     gameContainer.appendChild(enemyGroup);
   }
@@ -185,7 +221,7 @@ for (let i = 0; i < 5; i++) {
       ammo.style.top = newTop + "px";
       checkCollision(ammo, ammoInterval);
     }, 50);
-    ammoSound.play();
+    // ammoSound.play();
   }
 
   function checkCollision(ammo, intervalId) {

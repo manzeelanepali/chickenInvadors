@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const ammoHeight = 10;
   let currentScore = 0;
   let highestScore = localStorage.getItem("highestScore") || 0;
+  let gameOver = false;
+
   
   
   function startGame() {
@@ -85,7 +87,7 @@ function getRandomNumber(min, max) {
 
 // setInterval(createBox, 6000); // Generate box every 1 minute
 
-// ...
+
 
 
 function getRandomNumber(min, max) {
@@ -172,7 +174,11 @@ console.log(groupWidth,"hey")
     let top = 0;
     let direction = 1;
     const intervalId = setInterval(() => {
-     
+      
+
+
+
+
       left += 5 * direction;
       console.log("left",left)
 
@@ -197,10 +203,12 @@ console.log(groupWidth,"hey")
              top += 50;// Reverse direction when reaching the container edges
           console.log( "check again")
       }
-    }, 60);
+    }, 40);
 
     gameContainer.appendChild(enemyGroup);
   }
+
+
   
 
   function fireAmmo() {
@@ -220,16 +228,17 @@ console.log(groupWidth,"hey")
       let newTop = currentTop - ammoSpeed;
       ammo.style.top = newTop + "px";
       checkCollision(ammo, ammoInterval);
-    }, 50);
+    }, 5);
     // ammoSound.play();
   }
 
   function checkCollision(ammo, intervalId) {
     const ammoRect = ammo.getBoundingClientRect();
     const enemyChickens = document.querySelectorAll(".enemy-chicken");
+    const mainPlayerRect = mainPlayer.getBoundingClientRect();
 
-    for (let i = 0; i < enemyChickens.length; i++) {
-      const enemyChicken = enemyChickens[i];
+    for (const element of enemyChickens) {
+      const enemyChicken = element;
       const enemyRect = enemyChicken.getBoundingClientRect();
       enemyHit.play();
 
@@ -242,7 +251,16 @@ console.log(groupWidth,"hey")
 
         break;
       }
+
+      console.log('[app.js--[255]], mainPlayerRect',mainPlayerRect,"enemyRect",enemyRect);
+      if (isColliding(enemyRect, mainPlayerRect)) {
+     
+        console.log('[app.js--[258]], gameOver',gameOver);
+      
+      }
     }
+
+   
      if (enemyChickens.length === 0) {
     clearInterval(intervalId);
     generateChickenGroup();
@@ -270,5 +288,5 @@ console.log(groupWidth,"hey")
   startButton.addEventListener("click", startGame);
   scorePlaceHolder.classList.add("score-placeholder");
   scorePlaceHolder.textContent = "Score: 0 (Highest: " + highestScore + ")";
-  mainContainer.appendChild(scorePlaceHolder);
+  gameContainer.appendChild(scorePlaceHolder);
 });
